@@ -6,6 +6,8 @@ import Uploading from '../Uploading/Uploading'
 import DownloadJson from '../DownloadJson/DownloadJson'
 import download from 'downloadjs';
 
+// Access environment variables
+const BACKEND_URL = process.env.REACT_APP_PYTHON_URL;
 
 function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
 
@@ -49,7 +51,7 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("form_number", selectedOption);
-      const response = await fetch("http://localhost:8000/upload/", {
+      const response = await fetch(`${BACKEND_URL}/upload/`, {
         method: "POST",
         body: formData,
         credentials: "include",  // Ensure cookies are included in the request
@@ -75,7 +77,7 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
       }
       if (isSignature) {
         try {
-          const signature = await fetch("http://localhost:8000/get_signature/", {
+          const signature = await fetch(`${BACKEND_URL}/get_signature/`, {
             method: "POST",
             body: formData,
             credentials: "include",  // Ensure cookies are included in the request

@@ -15,6 +15,10 @@ Chart.register(
   Legend
 );
 
+
+// Access environment variables
+const BACKEND_URL = process.env.REACT_APP_PYTHON_URL;
+
 const BillingPage = () => {
   const [billingData, setBillingData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,7 +30,7 @@ const BillingPage = () => {
   useEffect(() => {
     const fetchBillingData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/billing/', {
+        const response = await fetch(`${BACKEND_URL}/billing/`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -44,7 +48,7 @@ const BillingPage = () => {
   }, []);
 
   const downloadFile = (type) => {
-    const url = `http://localhost:8000/billing/${type}/`;
+    const url = `${BACKEND_URL}billing/${type}/`;
     window.open(url, '_blank');
   };
 

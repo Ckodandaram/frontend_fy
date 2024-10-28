@@ -5,6 +5,12 @@ import eyeSlashIcon from "../../assets/icons/eye-icon-slash.svg";
 import "./Login.css";
 import Cookies from 'js-cookie';  // Import js-cookie to handle cookies
 import { TailSpin } from "react-loader-spinner";
+// import dotenv from '../../../env';
+// dotenv.config();
+
+
+// Access environment variables
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -16,8 +22,8 @@ function Login() {
   async function loginUser(event) {
     event.preventDefault();
     setSigningIn(true);
-
-    const response = await fetch("http://localhost:4000/api/login", {
+    let login_url = `${BACKEND_URL}/api/login`;
+    const response = await fetch(login_url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

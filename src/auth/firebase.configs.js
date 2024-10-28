@@ -10,14 +10,14 @@
 // };
 
 
-import dotenv from '../../env';
+import dotenv from 'dotenv';
 
 //Load environment variables from .env file
 dotenv.config();
 
 export const firebaseConfig = {
 
-  apiKey: API_KEY,
+  apiKey: process.env.API_KEY,
 
   authDomain: AUTH_DOMAIN,
 
