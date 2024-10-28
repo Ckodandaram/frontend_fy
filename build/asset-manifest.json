@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ae7c086e.css",
+    "main.js": "/static/js/main.e80c96da.js",
+    "static/media/aeroqube-logo.webp": "/static/media/aeroqube-logo.73d7aba9a58f3e6b234b.webp",
+    "static/media/appLogo.svg": "/static/media/appLogo.e036f03ef0e2f1af5c539fe926c50c74.svg",
+    "static/media/eye-icon-slash.svg": "/static/media/eye-icon-slash.aac694ac9c23b2da8e879b44dbc70ffd.svg",
+    "static/media/eye-icon.svg": "/static/media/eye-icon.63924dbfa4ad4e1343bb6346dd66bbdb.svg",
+    "static/media/uploadLogo.svg": "/static/media/uploadLogo.08ae9dffc19dea8f112fe984c64b8475.svg",
+    "index.html": "/index.html",
+    "static/media/fileType.svg": "/static/media/fileType.d1722089176449eaa5c1378f33cbd973.svg",
+    "main.ae7c086e.css.map": "/static/css/main.ae7c086e.css.map",
+    "main.e80c96da.js.map": "/static/js/main.e80c96da.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ae7c086e.css",
+    "s.tatic/js/main.e80c96da.js"
+  ]
+}

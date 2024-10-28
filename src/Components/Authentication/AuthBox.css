@@ -1,0 +1,41 @@
+.Rectangle-3 {
+    flex-grow: 0;
+    padding: 30px 38px 22px;
+    border-radius: 10px;
+    border: dotted 1px #cdbee1;
+    background-color: #fff;
+  }
+
+  .Email-address {
+    flex-grow: 0;
+    font-family: Roboto;
+    font-size: 14px;
+    text-align: left;
+    color: #2a4365;
+  }
+
+  .Password {
+    flex-grow: 0;
+    margin-top: 30px;
+    font-family: Roboto;
+    font-size: 14px;
+    text-align: left;
+    color: #2a4365;
+  }
+
+  .fieldheading{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .mailLogo{
+    height: 18px;
+    margin-right: 5px;
+    margin-top: 2px;
+  }
+
+  .passwordLogo{
+    margin-top: 30px;
+    margin-right: 5px;
+    height: 18px;
+  }

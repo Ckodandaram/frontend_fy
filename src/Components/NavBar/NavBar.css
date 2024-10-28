@@ -1,0 +1,63 @@
+/* General styles for the navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2d3748;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it stays on top of other elements */
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: small;
+}
+
+/* Styles for the app logo */
+.appLogo {
+  height: 50px;
+  cursor: pointer;
+}
+
+/* Container for the navigation links and sign-up/logout button */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Pushes the nav-actions to the right */
+}
+
+/* Styles for the navigation links */
+.nav-link {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #2980b9;
+  color: white;
+}
+
+/* Styles for the sign-up/logout button */
+.signUp button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: small;
+}
+
+.signUp button:hover {
+  background-color: #c0392b;
+}

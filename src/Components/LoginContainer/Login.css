@@ -1,0 +1,50 @@
+#loginContainer {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#innerLoginContainer {
+  border-radius: 12px;
+}
+
+.form-control {
+  height: 50px;
+}
+
+#password {
+  padding-right: 45px;
+}
+
+#password:active {
+  z-index: 1;
+}
+
+#passwordToggleIcon {
+  height: 28px;
+  margin-left: -36px;
+  z-index: 5;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  #formContainer {
+    width: 85vw;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    #formContainer {
+        width: 70vw;
+      }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    #formContainer {
+        width: 50vw;
+      }
+}
+
+@media (min-width: 1201px) {
+    #formContainer {
+        width: 30vw;
+      }
+}

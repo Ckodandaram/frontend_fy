@@ -1,0 +1,34 @@
+.Rectangle-3 {
+    display: flex;
+    width: 45%;
+    height: 6%;
+    margin: 40px 330px 0;
+    padding: 30px ;
+    border-radius: 8px;
+    background-color: #0bb1dc;
+  }
+
+.uploading {
+    margin-left: auto;
+    align-self: center;
+    color: white;
+    font-size: 14px;
+}
+
+.fileName {
+    margin-left: 10px;
+    align-self: center;
+    color: white;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 14px;
+    max-width: 100px;
+}
+
+.fileType{
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+}

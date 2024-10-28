@@ -1,0 +1,36 @@
+.download-json {
+    display: flex;
+    width: 150px;
+    height: 60px;
+    flex-grow: 0;
+    margin: 40px 40px 40px 0;
+    border-radius: 4px;
+    background-color: #0bb1dc;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.download-xml {
+    display: flex;
+    width: 150px;
+    height: 60px;
+    flex-grow: 0;
+    margin: 40px 40px 0 0;
+    border-radius: 4px;
+    background-color: #0bb1dc;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.download-button{
+    display: flex;
+    flex-direction: row;
+    margin-left: 40px;
+    margin-bottom: 40px;
+}

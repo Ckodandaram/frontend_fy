@@ -1,0 +1,19 @@
+/* .screen-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7fafc;
+  width: match-parent;
+  height: 100vh;
+} */
+
+
+.screen-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7fafc;
+  width: 100%;
+  height: 100vh;
+  /* padding-top: 70px; */
+}

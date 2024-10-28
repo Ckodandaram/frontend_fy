@@ -1,0 +1,17 @@
+.Rectangle-42 {
+    width: 141px;
+    height: 41px;
+    flex-grow: 0;
+    margin: 31px 118px 0 117px;
+    padding-top: 5px;
+    border-radius: 4px;
+    background-color: #0bb1dc;
+  }
+
+  .Sign-in {
+    flex-grow: 0;
+    font-family: Roboto;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+  }

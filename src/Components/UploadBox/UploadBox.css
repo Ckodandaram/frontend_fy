@@ -1,0 +1,48 @@
+.Rectangle-1 {
+    display: flex;
+    width: 65%;
+    height: 70%;
+    min-height: 400px;
+    flex-direction: column;
+    border-radius: 10px;
+    border: dashed 1.5px #afafaf;
+    background-color: #edf2f7;
+  }
+
+  .Rectangle-1:hover {
+    background-color: #5a738c;
+  }
+
+  .max-50MB-pdf-file-only {
+    display: flex;
+    flex-grow: 0;
+    font-family: Roboto;
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+    color: #b0b0b0;
+  }
+  .Drop-or-select-files-from-device {
+    flex-grow: 0;
+    font-family: Roboto;
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+    color: #b0b0b0;
+  }
+  .Upload-File {
+    flex-grow: 0;
+    font-family: Roboto;
+    font-size: 24px;
+    margin-top: 10px;
+    font-weight: 500;
+    text-align: center;
+    color: #0bb1dc;
+  }
+
+  .uploadLogo{
+    margin-top: 20px;
+    height: 90px;
+  }
