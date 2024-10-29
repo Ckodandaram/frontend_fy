@@ -45,16 +45,27 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
     handleFileUpload(d_fomat);
   }
 
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  }
+
   const handleFileUpload = async (fileType) => {
     try {
       setFormState(3);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("form_number", selectedOption);
+      const token = getCookie("token");
       const response = await fetch(`${BACKEND_URL}/upload/`, {
         method: "POST",
         body: formData,
-        credentials: "include",  // Ensure cookies are included in the request
+        headers: {
+          "Authorization": `Bearer ${token}`, // Include token in Authorization header
+          "Content-Type": "application/json",
+        },
       });
 
       if (response.ok) {
@@ -80,7 +91,10 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
           const signature = await fetch(`${BACKEND_URL}/get_signature/`, {
             method: "POST",
             body: formData,
-            credentials: "include",  // Ensure cookies are included in the request
+            headers: {
+              "Authorization": `Bearer ${token}`, // Include token in Authorization header
+              "Content-Type": "application/json",
+            },
           });
           if (signature.ok) {
             const data = await signature.blob();

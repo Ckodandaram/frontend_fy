@@ -23,16 +23,29 @@ const BillingPage = () => {
   const [billingData, setBillingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [url, setUrl] = useState(null);
   const [documentPage, setDocumentPage] = useState(0); // Track current page for documents
   const [apiCallPage, setApiCallPage] = useState(0); // Track current page for API calls
   const pageSize = 10;
 
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  }
+  
   useEffect(() => {
     const fetchBillingData = async () => {
       try {
+        const token = getCookie("token");
         const response = await fetch(`${BACKEND_URL}/billing/`, {
           method: 'GET',
-          credentials: 'include',
+          headers: {
+            "Authorization": `Bearer ${token}`, // Include token in Authorization header
+            "Content-Type": "application/json",
+          },
         });
         const data = await response.json();
         setBillingData(data);
@@ -47,9 +60,31 @@ const BillingPage = () => {
     fetchBillingData();
   }, []);
 
+  useEffect(() => {
+    const fetchBillingData = async () => {
+      try {
+        const token = getCookie("token");
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            "Authorization": `Bearer ${token}`, // Include token in Authorization header
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (error) {
+        setError(error.message);
+        console.error("Error fetching billing data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBillingData();
+  }, [url]);
+
   const downloadFile = (type) => {
-    const url = `${BACKEND_URL}billing/${type}/`;
-    window.open(url, '_blank');
+    setUrl(`${BACKEND_URL}/billing/${type}/`);
+    // window.open(url, '_blank');
   };
 
   const handleNextPage = (type) => {
