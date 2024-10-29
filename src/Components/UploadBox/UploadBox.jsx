@@ -52,8 +52,9 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
     return null;
   }
 
+  const token = getCookie("token");
+
   const handleFileUpload = async (fileType) => {
-    const token = getCookie("token");
     try {
       setFormState(3);
       const formData = new FormData();
@@ -64,12 +65,10 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
         body: formData,
         headers: {
           "Authorization": `Bearer ${token}`, // Include token in Authorization header
-          "Content-Type": "application/json",
-        },
+        }, 
       });
 
-      if (response.ok) 
-        {
+      if (response.ok) {
         const js_data = await response.text();
         const data = JSON.parse(js_data);
         let type = 'application/json';
@@ -94,8 +93,7 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
             body: formData,
             headers: {
               "Authorization": `Bearer ${token}`, // Include token in Authorization header
-              "Content-Type": "application/json",
-            },
+            }, 
           });
           if (signature.ok) {
             const data = await signature.blob();
