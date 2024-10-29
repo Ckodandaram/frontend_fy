@@ -53,12 +53,12 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
   }
 
   const handleFileUpload = async (fileType) => {
+    const token = getCookie("token");
     try {
       setFormState(3);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("form_number", selectedOption);
-      const token = getCookie("token");
       const response = await fetch(`${BACKEND_URL}/upload/`, {
         method: "POST",
         body: formData,
@@ -68,7 +68,8 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
         },
       });
 
-      if (response.ok) {
+      if (response.ok) 
+        {
         const js_data = await response.text();
         const data = JSON.parse(js_data);
         let type = 'application/json';
