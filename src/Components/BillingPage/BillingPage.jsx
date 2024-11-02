@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import jsPDF from 'jspdf';
+import axios from 'axios'
+import 'jspdf-autotable'
 import { Line } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import BillingNavbar from './BillingNavbar';
@@ -26,6 +29,8 @@ const BillingPage = () => {
   const [documentPage, setDocumentPage] = useState(0); // Track current page for documents
   const [apiCallPage, setApiCallPage] = useState(0); // Track current page for API calls
   const pageSize = 10;
+  const [selectedDocument, setSelectedDocument] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
 
   function getCookie(name) {
@@ -79,6 +84,48 @@ const BillingPage = () => {
     } else {
       if (apiCallPage > 0) setApiCallPage(apiCallPage - 1);
     }
+  };
+
+  const handleViewClick = (doc) => {
+    setSelectedDocument(doc);
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+    setSelectedDocument(null);
+  };
+  const handlePrintDownload = () => {
+    const doc = new jsPDF();
+    doc.text('Document Details', 20, 10);
+    doc.autoTable({
+      startY: 20,
+      head: [['Field', 'Value']],
+      body: [
+        ['Document ID', selectedDocument.document_id],
+        ['Document Name', selectedDocument.document_name],
+        ['Type', selectedDocument.type],
+        ['Size', `${(selectedDocument.size / 1024).toFixed(2)} KB`],
+        ['Status', selectedDocument.status],
+        ['Processing Timestamp', new Date(selectedDocument.processing_timestamp).toLocaleString()],
+        ['Processing Duration', `${selectedDocument.processing_duration} seconds`],
+        ['Number of Pages', selectedDocument.number_of_pages],
+      ],
+    });
+
+    doc.text('API Calls', 20, doc.autoTable.previous.finalY + 10);
+    doc.autoTable({
+      startY: doc.autoTable.previous.finalY + 20,
+      head: [['API ID', 'API Endpoint', 'Timestamp', 'Status']],
+      body: selectedDocument.api_calls.map((apiCall) => [
+        apiCall.api_request_id,
+        apiCall.api_endpoint,
+        new Date(apiCall.timestamp).toLocaleString(),
+        apiCall.status,
+      ]),
+    });
+
+    doc.save(`doc_${selectedDocument.document_id}.pdf`);
   };
 
   if (loading) {
@@ -189,6 +236,7 @@ const BillingPage = () => {
                 <th>Number of Pages</th>
                 <th>Date Processed</th>
                 <th>Charges (₹)</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -200,6 +248,9 @@ const BillingPage = () => {
                   <td>{doc.number_of_pages}</td>
                   <td>{new Date(doc.processing_timestamp).toLocaleDateString()}</td>
                   <td>{doc.charges.toFixed(2)}</td>
+                  <td>
+                    <button className="view-button" onClick={() => handleViewClick(doc)}>View</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -211,6 +262,13 @@ const BillingPage = () => {
               <button onClick={() => handleNextPage('documents')} disabled={(documentPage + 1) * pageSize >= billingData.documents.length}>Next</button>
             </div>
           </div>
+          {dialogOpen && selectedDocument && (
+            <DocumentDetailsDialog
+              document={selectedDocument}
+              onClose={handleCloseDialog}
+              onPrintDownload={handlePrintDownload}
+            />
+          )}
         </div>
 
         <div className="api-call-summary">
@@ -249,6 +307,49 @@ const BillingPage = () => {
       <div className="billing-graph">
         <h3>Usage Over Time</h3>
         <Line data={chartData} />
+      </div>
+    </div>
+  );
+};
+
+const DocumentDetailsDialog = ({ document, onClose, onPrintDownload }) => {
+  return (
+    <div className="dialog-overlay">
+      <div className="dialog">
+        <h3>Document Details</h3>
+        <p><strong>Document ID:</strong> {document.document_id}</p>
+        <p><strong>Document Name:</strong> {document.document_name}</p>
+        <p><strong>Type:</strong> {document.type}</p>
+        <p><strong>Size:</strong> {(document.size / 1024).toFixed(2)} KB</p>
+        <p><strong>Status:</strong> {document.status}</p>
+        <p><strong>Processing Timestamp:</strong> {new Date(document.processing_timestamp).toLocaleString()}</p>
+        <p><strong>Processing Duration:</strong> {document.processing_duration} seconds</p>
+        <p><strong>Number of Pages:</strong> {document.number_of_pages}</p>
+        <h4>API Calls</h4>
+        <table className="api-calls-table">
+          <thead>
+            <tr>
+              <th>API ID</th>
+              <th>API Endpoint</th>
+              <th>Timestamp</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {document.api_calls.map((apiCall) => (
+              <tr key={apiCall.api_request_id}>
+                <td>{apiCall.api_request_id}</td>
+                <td>{apiCall.api_endpoint}</td>
+                <td>{new Date(apiCall.timestamp).toLocaleString()}</td>
+                <td>{apiCall.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className='dialog-buttons'>
+          <button className='downld-button' onClick={onPrintDownload}>Download</button>
+          <button className='close-button' onClick={onClose}>Close</button>
+        </div>
       </div>
     </div>
   );

@@ -13,7 +13,6 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
 
   const [file, setFile] = useState(null)
 
-
   const fileInput = useRef(null);
 
   const handleClick = () => {
@@ -60,6 +59,20 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("form_number", selectedOption);
+
+      const res = await fetch(`${BACKEND_URL}/insert_document/`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Authorization": `Bearer ${token}`, // Include token in Authorization header
+        }, 
+      });
+
+      const js_data = await res.text();
+      const data = JSON.parse(js_data);
+
+      formData.append("doc_id", data);
+
       const response = await fetch(`${BACKEND_URL}/upload/`, {
         method: "POST",
         body: formData,
