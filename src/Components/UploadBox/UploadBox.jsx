@@ -60,7 +60,7 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
       formData.append("file", file);
       formData.append("form_number", selectedOption);
 
-      const res = await fetch(`${BACKEND_URL}/insert_document/`, {
+      const res = await fetch(`${BACKEND_URL}/upload/`, {
         method: "POST",
         body: formData,
         headers: {
@@ -73,7 +73,7 @@ function UploadBox({ selectedOption, isSignature, setFormState, formState }) {
 
       formData.append("doc_id", data);
 
-      const response = await fetch(`${BACKEND_URL}/upload/`, {
+      const response = await fetch(`${BACKEND_URL}/extract/`, {
         method: "POST",
         body: formData,
         headers: {

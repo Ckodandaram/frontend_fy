@@ -323,7 +323,7 @@ const DocumentDetailsDialog = ({ document, onClose, onPrintDownload }) => {
         <p><strong>Size:</strong> {(document.size / 1024).toFixed(2)} KB</p>
         <p><strong>Status:</strong> {document.status}</p>
         <p><strong>Processing Timestamp:</strong> {new Date(document.processing_timestamp).toLocaleString()}</p>
-        <p><strong>Processing Duration:</strong> {document.processing_duration} seconds</p>
+        <p><strong>Processing Duration:</strong> {document.processing_duration.toFixed(1)} seconds</p>
         <p><strong>Number of Pages:</strong> {document.number_of_pages}</p>
         <h4>API Calls</h4>
         <table className="api-calls-table">
