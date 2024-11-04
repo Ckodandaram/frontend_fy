@@ -108,7 +108,7 @@ const BillingPage = () => {
         ['Size', `${(selectedDocument.size / 1024).toFixed(2)} KB`],
         ['Status', selectedDocument.status],
         ['Processing Timestamp', new Date(selectedDocument.processing_timestamp).toLocaleString()],
-        ['Processing Duration', `${selectedDocument.processing_duration} seconds`],
+        ['Processing Duration', `${selectedDocument.processing_duration.toFixed(1)} seconds`],
         ['Number of Pages', selectedDocument.number_of_pages],
       ],
     });
