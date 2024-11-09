@@ -35,6 +35,7 @@ export default function FormDetails() {
               <option value={1}>ATAC Form</option>
               <option value={2}>OKS Account Form</option>
               <option value={3}>Payroll Account Opening Form</option>
+              <option value={4}>Voters List</option>
           </select>
       </div>
 
